@@ -11,7 +11,10 @@ public class Map : MonoBehaviour, IResettable
 
     private void Start()
     {
-       
+        Death += (sender, e) =>
+        {
+            this.gameObject.SetActive(false);
+        };
     }
 
     public void Reset()
@@ -19,4 +22,12 @@ public class Map : MonoBehaviour, IResettable
 		// 다시 풀로 올라갈 때 내용 구현 ex) 충돌체 리셋, HP 리셋 등등
 		// IResettable 인터페이스의 기본형으로 반드시 구현해야 오류가 없음.
 	}
+    private void Update()
+    {
+       
+        if (this.gameObject.transform.position.z < MapManager.instance.pc.gameObject.transform.position.z - 10)
+        {
+            Death?.Invoke(this, null);
+        }
+    }
 }
