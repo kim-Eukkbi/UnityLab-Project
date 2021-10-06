@@ -13,12 +13,15 @@ public class MapManager : MonoBehaviour
     public Dictionary<int,Map> mapDic;
     [SerializeField]
     private GameObject mapObj;
+    [SerializeField]
+    private GameObject plane;
 
     public PlayerController pc;
 
-    float playerSpd = 5f;
-    float dist = 6f;
+    public Renderer rend;
 
+    public Transform lastTrm;
+    
     int mapCount = 0;
 
     private void Awake()
@@ -32,18 +35,23 @@ public class MapManager : MonoBehaviour
     void Start()
     {
         pc = GameObject.Find("Player").GetComponent<PlayerController>();
-
+        rend = plane.GetComponent<MeshRenderer>();
+        lastTrm = pc.transform;
         pool = new Pool<Map>(new PrefabFactory<Map>(mapObj), START_SIZE);
         for (int i = 0; i < pool.members.Count; i++)
         {
             pool.members[i].gameObject.SetActive(false);
         }
-        Spawn();
+        for (int i = 0; i < 10; i++)
+        {
+            Spawn();
+        }
+       
     }
 
     private void Update()
     {
-        if (mapCount <= 0) 
+        if (mapCount <= 10) 
         {
             Spawn();
         }
@@ -53,19 +61,18 @@ public class MapManager : MonoBehaviour
     {
         Map map = pool.Allocate();
 
-        print(playerSpd * dist);
-        map.gameObject.transform.position = new Vector3(pc.gameObject.transform.position.x, pc.gameObject.transform.position.y, pc.gameObject.transform.position.z + playerSpd * dist);
-
-
         EventHandler handler = null;
+
+        rend.material.color = new Color(UnityEngine.Random.Range(1,100), UnityEngine.Random.Range(1, 100), UnityEngine.Random.Range(1, 100));
+        map.transform.position = new Vector3(lastTrm.transform.position.x, lastTrm.transform.position.y, lastTrm.transform.position.z + rend.bounds.size.z);
 
         // 생성시 사망 처리용 Death 이벤트핸들러를 직접 정의 (Lambda식 구현)
         handler = (sender, e) => {
             pool.Release(map);
             map.Death -= handler;
-            print("무야호~");
             mapCount--;
         };
+        lastTrm = map.transform;
 
         map.Death += handler;
         map.gameObject.SetActive(true);
