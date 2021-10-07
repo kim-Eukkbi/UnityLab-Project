@@ -16,14 +16,15 @@ public class PlayerInput : MonoBehaviour
     {
         rid = gameObject.GetComponent<Rigidbody>();
         Input.gyro.enabled = true;
+        //rid.velocity = new Vector3(rid.position.x, rid.velocity.y, rid.position.z + speed * Time.deltaTime);
     }
     public void Update()
     {
         Debug.Log(Input.gyro.attitude);
         //var gyroMoveA = Input.gyro.attitude;
         var gyroMoveR = Input.gyro.rotationRateUnbiased;
-        transform.position = new Vector3(transform.position.x + gyroMoveR.y * sensitivity, transform.position.y, transform.position.z);
-        transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + speed * Time.deltaTime);
+        rid.velocity = new Vector3(gyroMoveR.y * sensitivity, rid.velocity.y , speed);
+        
 
         if(Input.GetMouseButtonDown(0))
         {
