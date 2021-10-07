@@ -25,7 +25,7 @@ public class Map : MonoBehaviour, IResettable
     private void Update()
     {
        
-        if (this.gameObject.transform.position.z < MapManager.instance.pc.gameObject.transform.position.z - 10)
+        if (this.gameObject.transform.position.z < MapManager.instance.pc.gameObject.transform.position.z - 20)
         {
             Death?.Invoke(this, null);
         }
