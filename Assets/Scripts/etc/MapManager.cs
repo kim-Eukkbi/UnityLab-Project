@@ -63,8 +63,15 @@ public class MapManager : MonoBehaviour
 
         EventHandler handler = null;
 
-        rend.material.color = new Color(UnityEngine.Random.Range(1,100), UnityEngine.Random.Range(1, 100), UnityEngine.Random.Range(1, 100));
-        map.transform.position = new Vector3(lastTrm.transform.position.x, lastTrm.transform.position.y, lastTrm.transform.position.z + rend.bounds.size.z);
+        if (mapCount == 0) 
+        {
+            map.transform.position = new Vector3(pc.transform.transform.position.x, pc.transform.transform.position.y, pc.transform.transform.position.z);
+
+        }
+        else
+        {
+            map.transform.position = new Vector3(lastTrm.transform.position.x, lastTrm.transform.position.y, lastTrm.transform.position.z + rend.bounds.size.z);
+        }
 
         // 생성시 사망 처리용 Death 이벤트핸들러를 직접 정의 (Lambda식 구현)
         handler = (sender, e) => {
