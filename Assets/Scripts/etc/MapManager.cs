@@ -8,23 +8,31 @@ public class MapManager : MonoBehaviour
 {
     public static MapManager instance;
 
+
+
+    #region Pool
     const int START_SIZE = 5;
     public Pool<Map> pool1;
     public Pool<Map> pool2;
     public Pool<Map> pool3;
     public Pool<Map> pool4;
     public Pool<Map> pool5;
-    public Dictionary<int,Map> mapDic;
+
+    #endregion
+    #region Map
+    public Transform lastTrm;
+    int mapCount = 0;
     [SerializeField]
     private List<GameObject> mapObjList = new List<GameObject>();
+    #endregion
 
     public PlayerController pc;
 
     public Renderer rend;
 
-    public Transform lastTrm;
+    public int fastIdx = 0;
     
-    int mapCount = 0;
+ 
 
     private void Awake()
     {
@@ -59,7 +67,12 @@ public class MapManager : MonoBehaviour
 
     void Spawn()
     {
-        int idx = UnityEngine.Random.Range(0,mapObjList.Count - 1);
+        int idx = 0;
+        do
+        {
+            idx = UnityEngine.Random.Range(0, mapObjList.Count - 1);
+        } while (idx == fastIdx);
+
         Map map = pool1.Allocate();
         switch (idx)
         {
@@ -85,7 +98,7 @@ public class MapManager : MonoBehaviour
 
         for (int i = 0; i < trms.Length; i++)
         {
-            if (trms[i].gameObject.CompareTag("Ground")) 
+            if (trms[i].gameObject.CompareTag("Ground"))
             {
                 rend = trms[i].GetComponent<MeshRenderer>();
             }
@@ -112,5 +125,6 @@ public class MapManager : MonoBehaviour
         map.Death += handler;
         map.gameObject.SetActive(true);
         mapCount++;
+        fastIdx = idx;
     }
 }
