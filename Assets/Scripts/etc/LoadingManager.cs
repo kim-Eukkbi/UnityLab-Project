@@ -12,6 +12,7 @@ public class LoadingManager : MonoBehaviour
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+
     }
 
     void OnDisable()
@@ -21,6 +22,14 @@ public class LoadingManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        try
+        {
+            UIManager.instance.player = GameObject.Find("Player");
+        }
+        catch
+        {
+            Debug.Log("플레이어없음");
+        }
         StartCoroutine(LoadScene());
     }
 

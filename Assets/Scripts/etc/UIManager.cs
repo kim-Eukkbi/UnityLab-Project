@@ -6,9 +6,17 @@ using DG.Tweening;
 
 public class UIManager : GenericSingleton<UIManager>
 {
+    protected override void Awake()
+    {
+        base.Awake();
+        DontDestroyOnLoad(this);
+    }
+
     bool toggle = false;
     float originX = 0;
     string selectedScene = "";
+    public GameObject player;
+
 
     [Header("게임시작화면")]
     [SerializeField] private CanvasGroup startPanel;
@@ -74,7 +82,12 @@ public class UIManager : GenericSingleton<UIManager>
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) OpenPanel(gameOverPanel);
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            OpenPanel(gameOverPanel);
+            player.GetComponent<PlayerInput>().speed = gameOverPanel.interactable ? 0 : 10;
+        }
+
     }
 
     public void ConfirmOn()
