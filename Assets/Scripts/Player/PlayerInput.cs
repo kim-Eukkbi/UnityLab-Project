@@ -16,7 +16,6 @@ public class PlayerInput : MonoBehaviour
     {
         rid = gameObject.GetComponent<Rigidbody>();
         Input.gyro.enabled = true;
-        //rid.velocity = new Vector3(rid.position.x, rid.velocity.y, rid.position.z + speed * Time.deltaTime);
     }
     public void Update()
     {
