@@ -92,7 +92,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2325842043509747984}
   - component: {fileID: 2868146970906209233}
-  - component: {fileID: 2868146970906209246}
   m_Layer: 0
   m_Name: Obstacle-6
   m_TagString: Untagged
@@ -135,18 +134,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2868146970906209246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3102097959620275114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b89bbbfa2d427ab45938a0783dafe2d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5902804778003478472
 GameObject:
   m_ObjectHideFlags: 0
@@ -159,6 +146,7 @@ GameObject:
   - component: {fileID: 2218645350617515754}
   - component: {fileID: 5038497984793198145}
   - component: {fileID: 2868146970593829036}
+  - component: {fileID: 7502159301789988293}
   m_Layer: 0
   m_Name: Cylinder.001
   m_TagString: Untagged
@@ -244,3 +232,15 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -7387706064836869012, guid: 6c4c78a4c9d3d5b428dbf44c6ad553ed, type: 3}
+--- !u!114 &7502159301789988293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5902804778003478472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b89bbbfa2d427ab45938a0783dafe2d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
