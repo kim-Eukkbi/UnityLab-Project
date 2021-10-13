@@ -68,7 +68,8 @@ public class UIManager : GenericSingleton<UIManager>
         retryBtn.onClick.AddListener(() => LoadingManager.LoadScene(LoadingManager.GetSceneName()));
         selectDifficultyBtn.onClick.AddListener(() => OpenPanel(selectDifficultyPanel));
         backMenuBtn.onClick.AddListener(()=> LoadingManager.LoadScene("UICreate"));
-        easy.onClick.AddListener(() => LoadingManager.LoadScene("UICreate"));
+
+        easy.onClick.AddListener(() => LoadingManager.LoadScene("InGame"));
         normal.onClick.AddListener(() => LoadingManager.LoadScene("UICreate"));
         hard.onClick.AddListener(() => LoadingManager.LoadScene("UICreate"));
         hell.onClick.AddListener(() => LoadingManager.LoadScene("UICreate"));
