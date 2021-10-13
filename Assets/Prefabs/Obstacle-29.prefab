@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animParent: {fileID: 4210761320607030383}
+  dropHash: -802706916
 --- !u!65 &1845980526090676677
 BoxCollider:
   m_ObjectHideFlags: 0
