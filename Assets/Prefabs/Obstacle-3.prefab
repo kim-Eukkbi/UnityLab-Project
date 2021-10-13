@@ -191,6 +191,7 @@ GameObject:
   - component: {fileID: 5871031950366554922}
   - component: {fileID: 1105601724169226243}
   - component: {fileID: 5305460071044840549}
+  - component: {fileID: 7281411202112760894}
   m_Layer: 0
   m_Name: Obstacle-3.001
   m_TagString: Untagged
@@ -275,6 +276,18 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -234800251166022956, guid: 8ee572fb70b2ffc478e4ccf8c7ec76ad, type: 3}
+--- !u!114 &7281411202112760894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4556564625124139008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b89bbbfa2d427ab45938a0783dafe2d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4999468387252625711
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,7 +298,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5632453570261203861}
   - component: {fileID: 5305460071615598971}
-  - component: {fileID: 5305460071615598970}
   m_Layer: 0
   m_Name: Obstacle-3
   m_TagString: Untagged
@@ -329,18 +341,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &5305460071615598970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4999468387252625711}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b89bbbfa2d427ab45938a0783dafe2d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5659321921183744194
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,6 +352,7 @@ GameObject:
   - component: {fileID: 8761408841303377668}
   - component: {fileID: 9139599816110739896}
   - component: {fileID: 6700050665223676881}
+  - component: {fileID: 1652749613953839834}
   m_Layer: 0
   m_Name: Sphere.002
   m_TagString: Untagged
@@ -422,6 +423,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1652749613953839834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5659321921183744194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b89bbbfa2d427ab45938a0783dafe2d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7825029423796825040
 GameObject:
   m_ObjectHideFlags: 0
