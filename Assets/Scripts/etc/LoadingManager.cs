@@ -9,7 +9,17 @@ public class LoadingManager : MonoBehaviour
     public static string nextScene;
     [SerializeField] Image progressBar;
 
-    private void Start()
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         StartCoroutine(LoadScene());
     }
@@ -20,10 +30,9 @@ public class LoadingManager : MonoBehaviour
         SceneManager.LoadScene("Loading");
     }
    
-    public static string GetSceneName()
-    {
-        return SceneManager.GetActiveScene().name;
-    }
+    public static string GetSceneName() => SceneManager.GetActiveScene().name;
+
+    public static void SetSceneName(string loadSceneName) => LoadingManager.nextScene = loadSceneName;
 
     IEnumerator LoadScene()
     { 
