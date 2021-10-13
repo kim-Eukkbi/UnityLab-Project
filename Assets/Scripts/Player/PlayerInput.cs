@@ -10,13 +10,14 @@ public class PlayerInput : MonoBehaviour
     public float sensitivity;
 
     private Rigidbody rid;
+    private Animator anim;
     private int jumpCount =0;
 
     public void Start()
     {
         rid = gameObject.GetComponent<Rigidbody>();
+        anim = gameObject.GetComponent<Animator>();
         Input.gyro.enabled = true;
-        //rid.velocity = new Vector3(rid.position.x, rid.velocity.y, rid.position.z + speed * Time.deltaTime);
     }
     public void Update()
     {
@@ -37,17 +38,23 @@ public class PlayerInput : MonoBehaviour
                 if(jumpCount >= 1)
                 {
                     rid.velocity = Vector3.zero;
-                    rid.AddForce(Vector3.up * jumpForce, ForceMode.Acceleration);
-                    jumpCount++;
+                    anim.SetTrigger("DoubleJump");
+                    JumpProcess();
                 }
                 else
                 {
-                    rid.AddForce(Vector3.up * jumpForce, ForceMode.Acceleration);
-                    jumpCount++;
+                    anim.SetTrigger("Jump");
+                    JumpProcess();
                 }
             }
             
         }
+    }
+
+    public void JumpProcess()
+    {
+        rid.AddForce(Vector3.up * jumpForce, ForceMode.Acceleration);
+        jumpCount++;
     }
 
     public void OnCollisionEnter(Collision other)
@@ -55,6 +62,7 @@ public class PlayerInput : MonoBehaviour
         if(other.gameObject.CompareTag("Ground"))
         {
             jumpCount = 0;
+            anim.Play("Running");
         }
     }
 }
