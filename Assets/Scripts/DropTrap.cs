@@ -6,6 +6,7 @@ public class DropTrap : MonoBehaviour
 {
     Animator anim;
     public Transform animParent;
+    public int dropHash = Animator.StringToHash("Drop");
 
     private void Start()
     {
@@ -19,10 +20,7 @@ public class DropTrap : MonoBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
-        if(col.CompareTag("Player"))
-        {
-            PlayAnim();
-        }
+        anim.SetTrigger(dropHash);
     }
 
 }
