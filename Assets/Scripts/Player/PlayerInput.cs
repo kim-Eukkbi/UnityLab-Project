@@ -7,6 +7,7 @@ public class PlayerInput : MonoBehaviour
 {
     public float speed;
     public float jumpForce;
+    public float sensitivity;
 
     private Rigidbody rid;
     private int jumpCount =0;
@@ -14,10 +15,16 @@ public class PlayerInput : MonoBehaviour
     public void Start()
     {
         rid = gameObject.GetComponent<Rigidbody>();
+        Input.gyro.enabled = true;
+        //rid.velocity = new Vector3(rid.position.x, rid.velocity.y, rid.position.z + speed * Time.deltaTime);
     }
     public void Update()
     {
-        transform.position = new Vector3(transform.position.x - speed * Time.deltaTime, transform.position.y, transform.position.z);
+        Debug.Log(Input.gyro.attitude);
+        //var gyroMoveA = Input.gyro.attitude;
+        var gyroMoveR = Input.gyro.rotationRateUnbiased;
+        rid.velocity = new Vector3(gyroMoveR.y * sensitivity, rid.velocity.y , speed);
+        
 
         if(Input.GetMouseButtonDown(0))
         {
