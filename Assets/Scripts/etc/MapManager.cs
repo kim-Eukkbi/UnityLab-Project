@@ -69,6 +69,8 @@ public class MapManager : MonoBehaviour
             idx = UnityEngine.Random.Range(0, mapObjList.Count - 1);
         } while (idx == fastIdx);
 
+        if (mapCount == 0)
+            idx = 9;
         Map map = poolList[idx].Allocate();
         
 
@@ -91,6 +93,7 @@ public class MapManager : MonoBehaviour
         else
         {
             map.transform.position = new Vector3(lastTrm.transform.position.x, lastTrm.transform.position.y, lastTrm.transform.position.z + rend.bounds.size.z);
+
         }
 
         // 생성시 사망 처리용 Death 이벤트핸들러를 직접 정의 (Lambda식 구현)
