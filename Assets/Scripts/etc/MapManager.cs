@@ -12,11 +12,9 @@ public class MapManager : MonoBehaviour
 
     #region Pool
     const int START_SIZE = 5;
-    public Pool<Map> pool1;
-    public Pool<Map> pool2;
-    public Pool<Map> pool3;
-    public Pool<Map> pool4;
-    public Pool<Map> pool5;
+
+    public List<Pool<Map>> poolList = new List<Pool<Map>>();
+
 
     #endregion
     #region Map
@@ -44,15 +42,13 @@ public class MapManager : MonoBehaviour
     }
     void Start()
     {
-        pc = GameObject.Find("Player").GetComponent<PlayerController>();
+        pc = GameObject.Find("Player").GetComponentInChildren<PlayerController>();
 
         lastTrm = pc.transform;
-        pool1 = new Pool<Map>(new PrefabFactory<Map>(mapObjList[0]), START_SIZE);
-        pool2 = new Pool<Map>(new PrefabFactory<Map>(mapObjList[1]), START_SIZE);
-        pool3 = new Pool<Map>(new PrefabFactory<Map>(mapObjList[2]), START_SIZE);
-        pool4 = new Pool<Map>(new PrefabFactory<Map>(mapObjList[3]), START_SIZE);
-        pool5 = new Pool<Map>(new PrefabFactory<Map>(mapObjList[4]), START_SIZE);
-       
+        for (int i = 0; i < mapObjList.Count; i++)
+        {
+            poolList.Add(new Pool<Map>(new PrefabFactory<Map>(mapObjList[i]), START_SIZE));
+        }
         
        
     }
@@ -73,25 +69,8 @@ public class MapManager : MonoBehaviour
             idx = UnityEngine.Random.Range(0, mapObjList.Count - 1);
         } while (idx == fastIdx);
 
-        Map map = pool1.Allocate();
-        switch (idx)
-        {
-            case 0:
-                map = pool1.Allocate();
-                break;
-            case 1:
-                map = pool2.Allocate();
-                break;
-            case 2:
-                map = pool3.Allocate();
-                break;
-            case 3:
-                map = pool4.Allocate();
-                break;
-            case 4:
-                map = pool5.Allocate();
-                break;
-        }
+        Map map = poolList[idx].Allocate();
+        
 
         EventHandler handler = null;
         Transform[] trms = map.gameObject.GetComponentsInChildren<Transform>();
@@ -116,7 +95,7 @@ public class MapManager : MonoBehaviour
 
         // 생성시 사망 처리용 Death 이벤트핸들러를 직접 정의 (Lambda식 구현)
         handler = (sender, e) => {
-            //pool.Release(map);
+            poolList[idx].Release(map);
             map.Death -= handler;
             mapCount--;
         };
