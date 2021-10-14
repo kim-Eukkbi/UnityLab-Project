@@ -19,7 +19,7 @@ public abstract class GenericSingleton<T> : GenericSingleton where T : GenericSi
     }
     protected virtual void Awake()
     {
-        if (instance != null)
+        if (Instance != null)
         {
             Destroy(gameObject);
         }
@@ -27,10 +27,5 @@ public abstract class GenericSingleton<T> : GenericSingleton where T : GenericSi
         {
             Instance = (T)this;
         }
-    }
-
-    private void OnDestroy()
-    {
-        Instance = null;
     }
 }

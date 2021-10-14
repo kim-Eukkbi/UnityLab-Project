@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 
     public PlayerController pc;
 
+    public bool isDied = false;
+
     private void Awake()
     {
         pc = GameObject.Find("Player").GetComponent<PlayerController>();
@@ -20,10 +22,11 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        if (UIManager.instance != null)
+        if (UIManager.instance != null && !isDied )
         {
             Time.timeScale = 0;
             UIManager.instance.OpenPanel(UIManager.instance.gameOverPanel);
+            isDied = true;
         }
 
         //더 할일이 있을 것 같으니 함수로 파둠

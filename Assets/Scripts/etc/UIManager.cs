@@ -17,6 +17,8 @@ public class UIManager : GenericSingleton<UIManager>
     string selectedScene = "";
     public GameObject player = null;
 
+    public Stack<CanvasGroup> panelStack = new Stack<CanvasGroup>();
+
 
     [Header("게임시작화면")]
     [SerializeField] private CanvasGroup startPanel;
@@ -44,66 +46,94 @@ public class UIManager : GenericSingleton<UIManager>
     [SerializeField] private Button selectHard;
     [SerializeField] private Button selectHell;
 
+
     void Start()
     {
-        fastStartButton.onClick.AddListener(() => LoadingManager.LoadScene("UICreate"));
+        //fastStartButton.onClick.AddListener(() => LoadingManager.LoadScene("UICreate"));
         selectPanelOnBtn.onClick.AddListener(() =>
         {
-            float destX = 0;
-            if (!toggle)
-            {
-                originX = selectPanel.localPosition.x;
-                destX = originX - 400f;
-            }
-            else
-            {
-                destX = originX;
-            }
-            toggle = !toggle;
+            ButtonsPanelControll();
+            
+        });
+        retryBtn.onClick.AddListener(() =>
+        {
+            PanelAllOff();
+            Time.timeScale = 1;
+            LoadingManager.LoadScene(LoadingManager.GetSceneName());
+            GameManager.instance.isDied = false;
+        });
+
+        selectDifficultyBtn.onClick.AddListener(() =>
+        {
+            OffPanel(gameOverPanel);
+            panelStack.Pop();
+            OpenPanel(selectDifficultyPanel);
+        });
+
+        backMenuBtn.onClick.AddListener(() =>
+        {
+            Time.timeScale = 1;
+            OpenPanel(startPanel);
+            OpenPanel(selectPanel.gameObject.GetComponent<CanvasGroup>());
+            OffPanel(gameOverPanel);
+            LoadingManager.LoadScene("Start");
 
             Sequence seq = DOTween.Sequence();
-            seq.Append(selectPanel.DOLocalMoveX(destX, 0.5f));
+            seq.Append(selectPanel.DOLocalMoveX(originX, 0f));
+            toggle = !toggle;
+
+            selectPanelOnBtn.gameObject.transform.Rotate(0, 0, gameObject.transform.rotation.z + 180);
+            GameManager.instance.isDied = false;
 
         });
-        retryBtn.onClick.AddListener(() => LoadingManager.LoadScene(LoadingManager.GetSceneName()));
-        selectDifficultyBtn.onClick.AddListener(() => OpenPanel(selectDifficultyPanel));
-        backMenuBtn.onClick.AddListener(()=> LoadingManager.LoadScene("UICreate"));
 
         easy.onClick.AddListener(() =>
         {
-            LoadingManager.LoadScene("InGame");
             PanelAllOff();
+            Time.timeScale = 1;
+            LoadingManager.LoadScene("InGame");
+
         });
-        normal.onClick.AddListener(() => LoadingManager.LoadScene("UICreate"));
-        hard.onClick.AddListener(() => LoadingManager.LoadScene("UICreate"));
-        hell.onClick.AddListener(() => LoadingManager.LoadScene("UICreate"));
+        //normal.onClick.AddListener(() => LoadingManager.LoadScene("UICreate"));
+        //hard.onClick.AddListener(() => LoadingManager.LoadScene("UICreate"));
+        //hell.onClick.AddListener(() => LoadingManager.LoadScene("UICreate"));
 
         selectEasy.onClick.AddListener(() =>
         {
-            LoadingManager.LoadScene("InGame");
+            Time.timeScale = 1;
             PanelAllOff();
+            for(int i = 0; i < panelStack.Count; i++)
+            {
+                panelStack.Pop();
+            }
+            LoadingManager.LoadScene("InGame");
+            GameManager.instance.isDied = false;
         });
-        selectNormal.onClick.AddListener(() => LoadingManager.LoadScene("UICreate"));
-        selectHard.onClick.AddListener(() => LoadingManager.LoadScene("UICreate"));
-        selectHell.onClick.AddListener(() => LoadingManager.LoadScene("UICreate"));
+        //selectNormal.onClick.AddListener(() => LoadingManager.LoadScene("UICreate"));
+        //selectHard.onClick.AddListener(() => LoadingManager.LoadScene("UICreate"));
+        //selectHell.onClick.AddListener(() => LoadingManager.LoadScene("UICreate"));
         TextBlink(startText, 0.3f, 2f);
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && GameManager.instance != null && !GameManager.instance.isDied)
         {
-            OpenPanel(gameOverPanel);
-            try
+            if (panelStack.Count <= 0  )
             {
-                player.GetComponent<PlayerInput>().speed = gameOverPanel.interactable ? 0 : 10;
+                Time.timeScale = 0;
+                OpenPanel(gameOverPanel);
             }
-            catch
+            else if (panelStack.Count == 1)
             {
-                Debug.LogError("플레이어가 없는 씬에서는 동작안함");
+                OffPanel(panelStack);
+                Time.timeScale = 1;
+            }
+            else if(panelStack.Count > 1)
+            {
+                OffPanel(panelStack);
             }
         }
-
     }
 
     public void ConfirmOn()
@@ -117,6 +147,7 @@ public class UIManager : GenericSingleton<UIManager>
         canvas.alpha = on ? 1 : 0;
         canvas.interactable = on;
         canvas.blocksRaycasts = on;
+        if (on) panelStack.Push(canvas);
     }
 
     private void TextBlink(Text text, float endAlpha, float duration) //깜빡이는 텍스트
@@ -134,8 +165,40 @@ public class UIManager : GenericSingleton<UIManager>
 
     void OffPanel(CanvasGroup canvas)
     {
+        
         canvas.alpha = 0;
         canvas.interactable = false;
         canvas.blocksRaycasts = false;
+    }
+
+    void OffPanel(Stack<CanvasGroup> c)
+    {
+        OffPanel(c.Peek());
+        c.Pop();
+    }
+
+    bool canDrag = true; // 버튼 패널 갖다 쓸 수 있는가
+
+    void ButtonsPanelControll()
+    {
+        if (canDrag)
+        {
+            canDrag = false;
+            float destX = 0;
+            if (!toggle)
+            {
+                originX = selectPanel.localPosition.x;
+                destX = originX - 400f;
+            }
+            else
+            {
+                destX = originX;
+            }
+            toggle = !toggle;
+
+            Sequence seq = DOTween.Sequence();
+            seq.Append(selectPanel.DOLocalMoveX(destX, 0.5f)).OnComplete(() => canDrag = true); 
+            selectPanelOnBtn.gameObject.transform.Rotate(0, 0, gameObject.transform.rotation.z + 180);
+        }
     }
 }
