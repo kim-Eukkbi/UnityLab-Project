@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9014881573451343852}
   - component: {fileID: 112740851455563391}
   - component: {fileID: 4272809839652148331}
+  - component: {fileID: 239416312194663506}
   m_Layer: 0
   m_Name: Obstacle-31.003
   m_TagString: Untagged
@@ -97,6 +98,18 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 8273519944819332156, guid: 5f700f4ff3d4b69408d1901a314a716e, type: 3}
+--- !u!114 &239416312194663506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2429154687111615990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b89bbbfa2d427ab45938a0783dafe2d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4002987830009385599
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,7 +120,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4379373042973509829}
   - component: {fileID: 4272809839438579786}
-  - component: {fileID: 4272809839438579789}
   m_Layer: 0
   m_Name: Obstacle-31
   m_TagString: Untagged
@@ -152,18 +164,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &4272809839438579789
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4002987830009385599}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b89bbbfa2d427ab45938a0783dafe2d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5084279570744364375
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,6 +176,7 @@ GameObject:
   - component: {fileID: 3786130859317851835}
   - component: {fileID: 8955724881756835657}
   - component: {fileID: 4272809840356554329}
+  - component: {fileID: 1885515139737033476}
   m_Layer: 0
   m_Name: Obstacle-31.002
   m_TagString: Untagged
@@ -261,6 +262,18 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 5583224509462577725, guid: 5f700f4ff3d4b69408d1901a314a716e, type: 3}
+--- !u!114 &1885515139737033476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5084279570744364375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b89bbbfa2d427ab45938a0783dafe2d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7933793310403584189
 GameObject:
   m_ObjectHideFlags: 0
@@ -273,6 +286,7 @@ GameObject:
   - component: {fileID: 2137947828179785120}
   - component: {fileID: 2805867541649922744}
   - component: {fileID: 4272809839604953270}
+  - component: {fileID: 1441624651650561021}
   m_Layer: 0
   m_Name: Obstacle-31.001
   m_TagString: Untagged
@@ -358,6 +372,18 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -5710159830101675537, guid: 5f700f4ff3d4b69408d1901a314a716e, type: 3}
+--- !u!114 &1441624651650561021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7933793310403584189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b89bbbfa2d427ab45938a0783dafe2d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7975253835319891761
 GameObject:
   m_ObjectHideFlags: 0
@@ -370,6 +396,7 @@ GameObject:
   - component: {fileID: 3559328491428714025}
   - component: {fileID: 2658513865927628480}
   - component: {fileID: 4272809840380399651}
+  - component: {fileID: 7881103798068850163}
   m_Layer: 0
   m_Name: Obstacle-31.000
   m_TagString: Untagged
@@ -455,3 +482,15 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -6213124155649146636, guid: 5f700f4ff3d4b69408d1901a314a716e, type: 3}
+--- !u!114 &7881103798068850163
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7975253835319891761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b89bbbfa2d427ab45938a0783dafe2d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

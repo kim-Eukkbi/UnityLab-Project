@@ -91,7 +91,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2719452655936849767}
   - component: {fileID: 2465675395060890754}
-  - component: {fileID: 2465675395060890753}
   m_Layer: 0
   m_Name: Obstacle-13
   m_TagString: Untagged
@@ -134,18 +133,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &2465675395060890753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3384102609960541661}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b89bbbfa2d427ab45938a0783dafe2d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5721623114215909024
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,6 +145,7 @@ GameObject:
   - component: {fileID: 4411529295134801114}
   - component: {fileID: 7374076577033668097}
   - component: {fileID: 2465675394582416319}
+  - component: {fileID: 2960309374057104874}
   m_Layer: 0
   m_Name: Obstacle-13.000
   m_TagString: Untagged
@@ -242,6 +230,18 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 8213246697600380863, guid: bbaee1258b3d2e5478753225434c6a40, type: 3}
+--- !u!114 &2960309374057104874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5721623114215909024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b89bbbfa2d427ab45938a0783dafe2d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6470610232308103674
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,6 +254,7 @@ GameObject:
   - component: {fileID: 544086792227146696}
   - component: {fileID: 1442421087311454958}
   - component: {fileID: 2465675395610162196}
+  - component: {fileID: 5695401604890821262}
   m_Layer: 0
   m_Name: Obstacle-13.001
   m_TagString: Untagged
@@ -340,3 +341,15 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4621773496120506434, guid: bbaee1258b3d2e5478753225434c6a40, type: 3}
+--- !u!114 &5695401604890821262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6470610232308103674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b89bbbfa2d427ab45938a0783dafe2d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
