@@ -15,7 +15,7 @@ public class UIManager : GenericSingleton<UIManager>
     bool toggle = false;
     float originX = 0;
     string selectedScene = "";
-    public GameObject player;
+    public GameObject player = null;
 
 
     [Header("게임시작화면")]
@@ -31,7 +31,7 @@ public class UIManager : GenericSingleton<UIManager>
 
     [Space(15)]
     [Header("게임오버")]
-    [SerializeField] private CanvasGroup gameOverPanel;
+    public CanvasGroup gameOverPanel;
     [SerializeField] private Button retryBtn;
     [SerializeField] private Button selectDifficultyBtn;
     [SerializeField] private Button backMenuBtn;
@@ -69,12 +69,20 @@ public class UIManager : GenericSingleton<UIManager>
         selectDifficultyBtn.onClick.AddListener(() => OpenPanel(selectDifficultyPanel));
         backMenuBtn.onClick.AddListener(()=> LoadingManager.LoadScene("UICreate"));
 
-        easy.onClick.AddListener(() => LoadingManager.LoadScene("InGame"));
+        easy.onClick.AddListener(() =>
+        {
+            LoadingManager.LoadScene("InGame");
+            PanelAllOff();
+        });
         normal.onClick.AddListener(() => LoadingManager.LoadScene("UICreate"));
         hard.onClick.AddListener(() => LoadingManager.LoadScene("UICreate"));
         hell.onClick.AddListener(() => LoadingManager.LoadScene("UICreate"));
 
-        selectEasy.onClick.AddListener(() => LoadingManager.LoadScene("UICreate"));
+        selectEasy.onClick.AddListener(() =>
+        {
+            LoadingManager.LoadScene("InGame");
+            PanelAllOff();
+        });
         selectNormal.onClick.AddListener(() => LoadingManager.LoadScene("UICreate"));
         selectHard.onClick.AddListener(() => LoadingManager.LoadScene("UICreate"));
         selectHell.onClick.AddListener(() => LoadingManager.LoadScene("UICreate"));
@@ -86,7 +94,14 @@ public class UIManager : GenericSingleton<UIManager>
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             OpenPanel(gameOverPanel);
-            player.GetComponent<PlayerInput>().speed = gameOverPanel.interactable ? 0 : 10;
+            try
+            {
+                player.GetComponent<PlayerInput>().speed = gameOverPanel.interactable ? 0 : 10;
+            }
+            catch
+            {
+                Debug.LogError("플레이어가 없는 씬에서는 동작안함");
+            }
         }
 
     }
@@ -107,5 +122,20 @@ public class UIManager : GenericSingleton<UIManager>
     private void TextBlink(Text text, float endAlpha, float duration) //깜빡이는 텍스트
     {
         DOTween.Sequence().Append(text.DOFade(endAlpha, duration)).SetLoops(-1, LoopType.Yoyo);
+    }
+
+    void PanelAllOff()
+    {
+        OffPanel(startPanel);
+        OffPanel(gameOverPanel);
+        OffPanel(selectDifficultyPanel);
+        OffPanel(selectPanel.gameObject.GetComponent<CanvasGroup>());
+    }
+
+    void OffPanel(CanvasGroup canvas)
+    {
+        canvas.alpha = 0;
+        canvas.interactable = false;
+        canvas.blocksRaycasts = false;
     }
 }

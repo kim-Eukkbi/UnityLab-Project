@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
         if (UIManager.instance != null)
         {
             Time.timeScale = 0;
-            UIManager.instance.OpenPanel(this.GetComponent<CanvasGroup>());
+            UIManager.instance.OpenPanel(UIManager.instance.gameOverPanel);
         }
 
         //더 할일이 있을 것 같으니 함수로 파둠
