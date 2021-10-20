@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("다수의 게임매니저가 실행중입니다");
         }
         instance = this;
-        UIManager.instance.OpenPanel(UIManager.instance.inGamePenel);
+        UIManager.instance.OpenPanel_NoneStack(UIManager.instance.inGamePenel);
         bestScore = PlayerPrefs.GetInt("BestScore");
     }
 	private void Update()

@@ -143,7 +143,7 @@ public class UIManager : GenericSingleton<UIManager>
                     OffPanel(panelStack);
                 }
             }
-            score.text ="Score : " + GameManager.instance.SetScore().ToString();
+            score.text =GameManager.instance.SetScore().ToString();
             if (GameManager.instance.bestScore < GameManager.instance.SetScore())
             {
                 bestScore.text ="Best : " + GameManager.instance.SetScore().ToString();
@@ -163,6 +163,14 @@ public class UIManager : GenericSingleton<UIManager>
         canvas.interactable = on;
         canvas.blocksRaycasts = on;
         if (on) panelStack.Push(canvas);
+    }
+
+    public void OpenPanel_NoneStack(CanvasGroup canvas) // 알파, 상호작용, 터치 
+    {
+        bool on = !canvas.interactable;
+        canvas.alpha = on ? 1 : 0;
+        canvas.interactable = on;
+        canvas.blocksRaycasts = on;
     }
 
     private void TextBlink(Text text, float endAlpha, float duration) //깜빡이는 텍스트
