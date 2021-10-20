@@ -9,6 +9,10 @@ public class GameManager : MonoBehaviour
     public PlayerController pc;
 
     public bool isDied = false;
+    public int bestScore;
+    public int score = 0;
+
+    private float time;
 
     private void Awake()
     {
@@ -18,13 +22,32 @@ public class GameManager : MonoBehaviour
             Debug.Log("다수의 게임매니저가 실행중입니다");
         }
         instance = this;
+        UIManager.instance.OpenPanel(UIManager.instance.inGamePenel);
+        bestScore = PlayerPrefs.GetInt("BestScore");
     }
+	private void Update()
+    {
+        time += Time.deltaTime;
 
-    public void GameOver()
+    }
+    public int SetScore()
+    {
+        return score = Mathf.FloorToInt(time);
+    }
+    public void SaveBestScore()
+    {
+        bestScore = PlayerPrefs.GetInt("BestScore");
+        if (score > bestScore)
+        {
+            PlayerPrefs.SetInt("BestScore", score);
+        }
+    }
+	public void GameOver()
     {
         if (UIManager.instance != null && !isDied )
         {
             Time.timeScale = 0;
+            SaveBestScore();
             UIManager.instance.OpenPanel(UIManager.instance.gameOverPanel);
             isDied = true;
         }

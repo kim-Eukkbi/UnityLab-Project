@@ -47,6 +47,12 @@ public class UIManager : GenericSingleton<UIManager>
     [SerializeField] private Button selectHell;
 
 
+    [Space(15)]
+    [Header("Á¡¼ö")]
+    public CanvasGroup inGamePenel;
+    [SerializeField] private Text score;
+    [SerializeField] private Text bestScore;
+
     void Start()
     {
         //fastStartButton.onClick.AddListener(() => LoadingManager.LoadScene("UICreate"));
@@ -112,26 +118,35 @@ public class UIManager : GenericSingleton<UIManager>
         //selectNormal.onClick.AddListener(() => LoadingManager.LoadScene("UICreate"));
         //selectHard.onClick.AddListener(() => LoadingManager.LoadScene("UICreate"));
         //selectHell.onClick.AddListener(() => LoadingManager.LoadScene("UICreate"));
+        bestScore.text = "Best : " + PlayerPrefs.GetInt("BestScore").ToString();
         TextBlink(startText, 0.3f, 2f);
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && GameManager.instance != null && !GameManager.instance.isDied)
+        if (GameManager.instance != null)
         {
-            if (panelStack.Count <= 0  )
+            if (Input.GetKeyDown(KeyCode.Escape) && !GameManager.instance.isDied)
             {
-                Time.timeScale = 0;
-                OpenPanel(gameOverPanel);
+                if (panelStack.Count <= 0)
+                {
+                    Time.timeScale = 0;
+                    OpenPanel(gameOverPanel);
+                }
+                else if (panelStack.Count == 1)
+                {
+                    OffPanel(panelStack);
+                    Time.timeScale = 1;
+                }
+                else if (panelStack.Count > 1)
+                {
+                    OffPanel(panelStack);
+                }
             }
-            else if (panelStack.Count == 1)
+            score.text ="Score : " + GameManager.instance.SetScore().ToString();
+            if (GameManager.instance.bestScore < GameManager.instance.SetScore())
             {
-                OffPanel(panelStack);
-                Time.timeScale = 1;
-            }
-            else if(panelStack.Count > 1)
-            {
-                OffPanel(panelStack);
+                bestScore.text ="Best : " + GameManager.instance.SetScore().ToString();
             }
         }
     }
@@ -160,6 +175,7 @@ public class UIManager : GenericSingleton<UIManager>
         OffPanel(startPanel);
         OffPanel(gameOverPanel);
         OffPanel(selectDifficultyPanel);
+        OffPanel(inGamePenel);
         OffPanel(selectPanel.gameObject.GetComponent<CanvasGroup>());
     }
 
